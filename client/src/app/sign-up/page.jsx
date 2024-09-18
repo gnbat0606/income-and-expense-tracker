@@ -1,12 +1,12 @@
-import { Login } from "@/components/login";
+import { Signup } from "@/components/Signup";
 
 export default function Home() {
   return (
     <div className="flex">
       <div className="w-[50%]">
-        <Login />
+        <Signup />
       </div>
-      <div className=" w-[50%] bg-back"></div>
+      <div className=" w-[50%] bg-blue-600"></div>
     </div>
   );
 }
