@@ -39,7 +39,7 @@ export const Login = () => {
       <div className="w-[384px] flex flex-col gap-4 items-center">
         <Input type="text" inputHandler={emailHandler} placeholder={"Email"} />
         <Input
-          type="password"
+          type={"password"}
           inputHandler={passwordHandler}
           placeholder={"Password"}
         />
@@ -47,7 +47,7 @@ export const Login = () => {
         <Button clickHandler={login} text={"Log in"} />
       </div>
       <AuthFooter
-        prop={"/sign-up"}
+        prop={"/signup"}
         footerText={"Don’t have account?"}
         buttonText={"Sign up"}
       />
