@@ -6,6 +6,7 @@ import { Button } from "./Button";
 import { AuthFooter } from "./AuthFooter";
 import { Input } from "./Input";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export const Signup = () => {
   const [error, setError] = useState("");
@@ -15,6 +16,8 @@ export const Signup = () => {
     password: "",
     rePassword: "",
   });
+
+  const router = useRouter();
 
   const nameHandler = (event) => {
     event.preventDefault();
@@ -54,11 +57,10 @@ export const Signup = () => {
           rePassword,
         }
       );
+      router.push("/login");
     } catch (error) {
       setError(error.response.data);
     }
-
-    console.log(response);
   };
 
   return (

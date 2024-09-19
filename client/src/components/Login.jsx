@@ -6,9 +6,11 @@ import { Button } from "@/components/Button";
 import { AuthFooter } from "./AuthFooter";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export const Login = () => {
   const [error, setError] = useState("");
+  const router = useRouter();
   const [loginInput, setLoginInput] = useState({
     username: "",
     password: "",
@@ -43,6 +45,7 @@ export const Login = () => {
       console.log(response);
 
       localStorage.setItem("token", response.data.token);
+      router.push("/signup");
     } catch (error) {
       setError(error.response.data);
     }
