@@ -1,14 +1,19 @@
 import cors from "cors";
-import express from "express";
+import express, { response } from "express";
 import env from "dotenv";
+
+import userRouter from "./routers/user.router.js";
+
 env.config();
 
 const app = express();
 const port = process.env.PORT;
 
-console.log(port);
-
 app.use(cors());
 app.use(express.json());
 
-app.listen(port, console.log(`http://localhost/${port}`));
+app.use("/api", userRouter);
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
+});

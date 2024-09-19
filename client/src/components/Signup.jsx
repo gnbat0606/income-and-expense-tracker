@@ -5,6 +5,7 @@ import { AuthTitle } from "./AuthTitle";
 import { Button } from "./Button";
 import { AuthFooter } from "./AuthFooter";
 import { Input } from "./Input";
+import axios from "axios";
 
 export const Signup = () => {
   const [error, setError] = useState("");
@@ -35,13 +36,29 @@ export const Signup = () => {
     setUserInput((prev) => ({ ...prev, rePassword: event.target.value }));
   };
 
-  const register = () => {
-    console.log(userInput);
+  const register = async () => {
+    const { username, password, rePassword } = userInput;
     if (userInput.password !== userInput.rePassword) {
       setError("2 password zuruuud baina");
+      return;
     } else {
       setError("");
     }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/user/signup",
+        {
+          username,
+          password,
+          rePassword,
+        }
+      );
+    } catch (error) {
+      setError(error.response.data);
+    }
+
+    console.log(response);
   };
 
   return (

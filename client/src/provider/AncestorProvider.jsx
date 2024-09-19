@@ -8,7 +8,7 @@ export const AncestorProvider = ({ children }) => {
   const ancestor = "knife";
   return (
     <AncestorContext.Provider value={{ ancestor }}>
-      {children}{" "}
+      {children}
     </AncestorContext.Provider>
   );
 };

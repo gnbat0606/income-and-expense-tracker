@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "username",
+      "password": "password",
+      "hashPassword": "$2a$10$UTwuj89ub9cCuykKuV2NJ.bJiXjdVRLZqq1iAvC0BHG//hhRNg4kq"
+    },
+    {
+      "username": "d",
+      "password": "d",
+      "hashPassword": "$2a$10$lB7GkR2FGd./jqjHunRVYuc9BQ66Q1lkr5AUmKcfMbzrlwf9g/fTS"
+    },
+    {
+      "username": "usernamed",
+      "password": "password",
+      "hashPassword": "$2a$10$GcbdldpOnCkJ7/tOtQIM5eus/mSdwoZS6XTKulTS44UnlsbGrrNwq"
+    }
+  ]
+}
