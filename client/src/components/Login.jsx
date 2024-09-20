@@ -12,12 +12,12 @@ export const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const [loginInput, setLoginInput] = useState({
-    username: "",
+    email: "",
     password: "",
   });
-  const usernameHandler = (event) => {
+  const emailHandler = (event) => {
     event.preventDefault();
-    setLoginInput((prev) => ({ ...prev, username: event.target.value }));
+    setLoginInput((prev) => ({ ...prev, email: event.target.value }));
   };
   const passwordHandler = (event) => {
     event.preventDefault();
@@ -25,11 +25,11 @@ export const Login = () => {
   };
 
   const login = async () => {
-    const { username, password } = loginInput;
+    const { email, password } = loginInput;
     console.log(loginInput);
 
-    if (!loginInput.password | !loginInput.username) {
-      setError("Username passwordoo hiine uu");
+    if (!loginInput.password | !loginInput.email) {
+      setError("email passwordoo hiine uu");
     } else {
       setError("");
     }
@@ -38,14 +38,14 @@ export const Login = () => {
       const response = await axios.post(
         "http://localhost:8000/api/user/login",
         {
-          username,
+          email,
           password,
         }
       );
       console.log(response);
 
       localStorage.setItem("token", response.data.token);
-      router.push("/signup");
+      router.push("/");
     } catch (error) {
       setError(error.response.data);
     }
@@ -58,11 +58,7 @@ export const Login = () => {
         description={"Welcome back, Please enter your details"}
       />
       <div className="w-[384px] flex flex-col gap-4 items-center">
-        <Input
-          type="text"
-          inputHandler={usernameHandler}
-          placeholder={"username"}
-        />
+        <Input type="text" inputHandler={emailHandler} placeholder={"email"} />
         <Input
           type={"password"}
           inputHandler={passwordHandler}

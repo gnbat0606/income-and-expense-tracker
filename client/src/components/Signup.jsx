@@ -40,11 +40,12 @@ export const Signup = () => {
   };
 
   const register = async () => {
-    const { username, password, rePassword } = userInput;
+    const { email, password, rePassword } = userInput;
     if (userInput.password !== userInput.rePassword) {
       setError("2 password zuruuud baina");
       return;
     } else {
+      alert("sign up success");
       setError("");
     }
 
@@ -52,7 +53,7 @@ export const Signup = () => {
       const response = await axios.post(
         "http://localhost:8000/api/user/signup",
         {
-          username,
+          email,
           password,
           rePassword,
         }

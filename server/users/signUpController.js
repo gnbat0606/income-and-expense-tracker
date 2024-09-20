@@ -9,12 +9,12 @@ export const signUpController = async (req, res) => {
 
   const userId = randomUUID();
 
-  const { username, password, rePassword } = req.body;
+  const { email, password, rePassword } = req.body;
 
-  const doesExist = result.users.find((el) => el.username == username);
+  const doesExist = result.users.find((el) => el.email == email);
 
   if (doesExist) {
-    res.status(400).send("username burttgeltei baina");
+    res.status(400).send("email burttgeltei baina");
     return;
   }
 
@@ -24,7 +24,8 @@ export const signUpController = async (req, res) => {
   const hashPassword = bcryptjs.hashSync(password, 10);
 
   result.users.push({
-    username,
+    email,
+    userId,
     password,
     hashPassword,
   });

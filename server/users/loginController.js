@@ -8,22 +8,22 @@ export const loginController = async (req, res) => {
   const result = JSON.parse(resultJson);
   const tokensecret = "iodgkhjlkhkhjkjjkhkhj";
 
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  const doesExist = result.users.find((el) => el.username == username);
+  const doesExist = result.users.find((el) => el.email == email);
 
   if (!doesExist) {
-    res.send("username or password incorrect").status(400);
+    res.status(400).send("email or password incorrect");
     return;
   }
   const passwordMatch = await bcrypt.compare(password, doesExist.hashPassword);
 
   if (!passwordMatch) {
-    res.send("username or password incorrect").status(400);
+    res.status(400).send("email or password incorrect");
     return;
   }
 
-  const token = jwt.sign({ username }, tokensecret, {
+  const token = jwt.sign({ email }, tokensecret, {
     expiresIn: "5m",
   });
 
