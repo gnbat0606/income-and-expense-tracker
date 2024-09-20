@@ -11,7 +11,7 @@ export const loginController = async (req, res) => {
   const { email, password } = req.body;
 
   const doesExist = result.users.find((el) => el.email == email);
-
+  console.log(doesExist);
   if (!doesExist) {
     res.status(400).send("email or password incorrect");
     return;
