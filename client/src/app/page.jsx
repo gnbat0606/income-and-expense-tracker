@@ -3,6 +3,7 @@
 import { Confirm1 } from "@/components/Confirm1";
 import { Confirm2 } from "@/components/Confirm2";
 import { Confirm3 } from "@/components/Confirm3";
+import { Progress } from "@/components/Progress";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -25,6 +26,8 @@ export default function Home() {
 
   return (
     <div>
+      <img src="logo&name.png" alt="" />
+      <Progress step={step} />
       <StepComponents continueHandler={continueHandler} />
     </div>
   );

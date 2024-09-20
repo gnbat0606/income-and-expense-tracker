@@ -25,3 +25,11 @@ body {
     text-wrap: balance;
   }
 }
+.steps .step-primary:after {
+  background-color: #0166ff;
+  border-color: #0166ff;
+}
+.steps .step-primary + .step-primary::before {
+  background-color: #0166ff;
+  border-color: #0166ff;
+}
