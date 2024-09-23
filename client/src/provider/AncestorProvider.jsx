@@ -12,6 +12,11 @@ export const AncestorProvider = ({ children }) => {
     </AncestorContext.Provider>
   );
 };
+const loginHandleFunction = async (email, password) => {
+  console.log(email, password);
+
+  const token = "token";
+};
 
 export const useAncestor = () => {
   const ancestor = useContext(AncestorContext);

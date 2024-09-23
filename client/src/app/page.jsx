@@ -25,8 +25,7 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <img src="logo&name.png" alt="" />
+    <div className="flex flex-col items-center pt-5 gap-24">
       <Progress step={step} />
       <StepComponents continueHandler={continueHandler} />
     </div>
