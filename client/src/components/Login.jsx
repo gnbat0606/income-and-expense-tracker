@@ -4,13 +4,16 @@ import { AuthTitle } from "@/components/AuthTitle";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { AuthFooter } from "./AuthFooter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/provider/userProvider";
 
 export const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
+  const { longinHandler, isLoggedIn, loading, token } = useUser();
+
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
@@ -26,7 +29,6 @@ export const Login = () => {
 
   const login = async () => {
     const { email, password } = loginInput;
-    console.log(loginInput);
 
     if (!loginInput.password | !loginInput.email) {
       setError("email passwordoo hiine uu");
@@ -35,21 +37,27 @@ export const Login = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/user/login",
-        {
-          email,
-          password,
-        }
-      );
-      console.log(response);
+      // const response = await axios.post(
+      //   "http://localhost:8000/api/user/login",
+      //   {
+      //     email,
+      //     password,
+      //   }
+      // );
 
-      localStorage.setItem("token", response.data.token);
+      // localStorage.setItem("token", response.data.token);
+      longinHandler(email, password);
       router.push("/");
     } catch (error) {
       setError(error.response.data);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/");
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-10">

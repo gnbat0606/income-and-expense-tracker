@@ -2,16 +2,17 @@ import fs from "fs";
 import { dbPath } from "../utils/constants.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const loginController = async (req, res) => {
   const resultJson = await fs.readFileSync(dbPath, "utf-8");
   const result = JSON.parse(resultJson);
-  const tokensecret = "iodgkhjlkhkhjkjjkhkhj";
+  // const tokensecret = "iodgkhjlkhkhjkjjkhkhj";
 
   const { email, password } = req.body;
 
   const doesExist = result.users.find((el) => el.email == email);
-  console.log(doesExist);
   if (!doesExist) {
     res.status(400).send("email or password incorrect");
     return;
@@ -23,8 +24,8 @@ export const loginController = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ email }, tokensecret, {
-    expiresIn: "5m",
+  const token = jwt.sign({ email }, process.env.SECRET, {
+    expiresIn: "1h",
   });
 
   res.status(200).send({ token });
