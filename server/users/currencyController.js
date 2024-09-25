@@ -13,7 +13,6 @@ export const currencyController = async (req, res) => {
   const result = JSON.parse(resultJson);
   const doesExist = result.users.find((el) => el.email == email);
   const a = Object.assign(doesExist, { currency });
-  console.log(a);
 
   res.status(200).send("Success");
 };

@@ -20,6 +20,7 @@ export const UserProvider = ({ children }) => {
         email,
         password,
       });
+
       window.localStorage.setItem("token", res.data.token);
       setToken(res.data.token);
       setIsLoggedIn(true);
@@ -28,7 +29,6 @@ export const UserProvider = ({ children }) => {
       setToken("");
       setLoading(false);
       setIsLoggedIn(false);
-      console.log(error.res.data);
 
       throw new Error(error.res.data);
     }
@@ -36,7 +36,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    console.log(token);
 
     if (token) {
       setToken(token);

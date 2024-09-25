@@ -1,9 +1,10 @@
 "use client";
 
-import local from "next/font/local";
 import { Button } from "./Button";
+
 import { Progress } from "./Progress";
 import { useState } from "react";
+import axios from "axios";
 
 export const Confirm2 = ({ continueHandler }) => {
   const [balance, setBalance] = useState();
@@ -14,10 +15,16 @@ export const Confirm2 = ({ continueHandler }) => {
 
   const handler = async () => {
     const token = localStorage.getItem("token");
-    console.log(token);
+    const res = axios.post(
+      "http://localhost:8000/api/user/balance",
+      { balance },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(res);
+
     console.log(balance);
 
-    // continueHandler();
+    continueHandler();
   };
   return (
     <div className="flex flex-col items-center w-[384px]">
