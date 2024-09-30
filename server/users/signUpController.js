@@ -1,17 +1,16 @@
 import bcryptjs from "bcryptjs";
-import fs from "fs";
+import { writeFileSync } from "fs";
 import { randomUUID } from "crypto";
 import { dbPath } from "../utils/constants.js";
+import { getDatabase } from "../utils/helper.js";
 
 export const signUpController = async (req, res) => {
-  const resultJson = await fs.readFileSync(dbPath, "utf-8");
-  const result = JSON.parse(resultJson);
+  const { username, email, password, rePassword } = req.body;
 
-  const userId = randomUUID();
+  const database = await getDatabase();
+  const userDatabase = database.users;
 
-  const { email, password, rePassword } = req.body;
-
-  const doesExist = result.users.find((el) => el.email == email);
+  const doesExist = userDatabase.find((el) => el.email == email);
 
   if (doesExist) {
     res.status(400).send("email burttgeltei baina");
@@ -21,17 +20,23 @@ export const signUpController = async (req, res) => {
   if (password !== rePassword) {
     res.send("password zuruud baina").status(400);
   }
-  const hashPassword = bcryptjs.hashSync(password, 10);
 
-  result.users.push({
+  const userId = randomUUID();
+  const hashPassword = bcryptjs.hashSync(password, 10);
+  const createdAt = new Date();
+  const UpdatedAt = new Date();
+
+  database.users.push({
     email,
+    username,
     userId,
-    password,
-    hashPassword,
+    password: hashPassword,
+    createdAt,
+    UpdatedAt,
   });
 
-  await fs.writeFileSync(dbPath, JSON.stringify(result), "utf-8");
-  res.send(result);
+  await writeFileSync(dbPath, JSON.stringify(database), "utf-8");
 
+  res.send(database);
   res.status(200).send("sign-up success");
 };

@@ -38,7 +38,7 @@ export const Confirm2 = ({ continueHandler }) => {
             <input
               onChange={handleSelect}
               placeholder="Balance"
-              type="number"
+              type="text"
               className="px-5 h-16 w-full bg-gray-50 text-sm rounded-lg"
             />
             <p className=" mt-2 text-xs text-gray-400">

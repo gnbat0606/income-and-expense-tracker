@@ -16,13 +16,13 @@ export const UserProvider = ({ children }) => {
 
   const longinHandler = async (email, password) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/user/login", {
-        email,
-        password,
+      const result = await axios.post("http://localhost:8000/api/user/login", {
+        email: email,
+        password: password,
       });
 
-      window.localStorage.setItem("token", res.data.token);
-      setToken(res.data.token);
+      window.localStorage.setItem("token", result.data.token);
+      setToken(result.data.token);
       setIsLoggedIn(true);
       setLoading(false);
     } catch (error) {
@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
       setLoading(false);
       setIsLoggedIn(false);
 
-      throw new Error(error.res.data);
+      throw new Error(error.result.data);
     }
   };
 

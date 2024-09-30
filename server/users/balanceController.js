@@ -1,18 +1,26 @@
-import fs from "fs";
-import { dbPath } from "../utils/constants.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { getDatabase } from "../utils/helper.js";
+import { dbPath } from "../utils/constants.js";
+import fs from "fs";
 dotenv.config();
 
 export const balanceController = async (req, res) => {
   const email = res.locals.email;
   const { balance } = req.body;
 
-  const resultJson = await fs.readFileSync(dbPath, "utf-8");
-  const result = JSON.parse(resultJson);
-  const doesExist = result.users.find((el) => el.email == email);
-  const s = Object.assign(doesExist, { balance });
+  const database = await getDatabase();
 
-  res.status(200).send("success");
+  const updatedUsers = database.users.map((el) => {
+    if (el.email === email) {
+      return { ...el, balance: el.balance };
+    } else {
+      return { ...el };
+    }
+  });
+
+  database.users = updatedUsers;
+
+  await fs.writeFileSync(dbPath, JSON.stringify(database));
+
+  res.status(200).send({ message: "Succesfully Updated" });
 };

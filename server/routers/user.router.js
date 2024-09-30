@@ -14,4 +14,3 @@ userRouter.post("/user/balance", authMiddleware, balanceController);
 
 userRouter.post("/user/test", testController);
 export default userRouter;
-``;
