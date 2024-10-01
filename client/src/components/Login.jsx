@@ -37,15 +37,15 @@ export const Login = () => {
     }
 
     try {
-      // const response = await axios.post(
-      //   "http://localhost:8000/api/user/login",
-      //   {
-      //     email,
-      //     password,
-      //   }
-      // );
+      const response = await axios.post(
+        "http://localhost:8000/api/user/login",
+        {
+          email,
+          password,
+        }
+      );
 
-      // localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.token);
       longinHandler(email, password);
       router.push("/");
     } catch (error) {

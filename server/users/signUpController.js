@@ -1,17 +1,9 @@
 import bcryptjs from "bcryptjs";
-import { writeFileSync } from "fs";
-import { hash, randomUUID } from "crypto";
-import { dbPath } from "../utils/constants.js";
-import { getDatabase } from "../utils/helper.js";
+import { randomUUID } from "crypto";
 import { sql } from "../database/index.js";
 
 export const signUpController = async (req, res) => {
   const { username, email, password, rePassword } = req.body;
-
-  // const database = await getDatabase();
-  // const userDatabase = database.users;
-
-  // const doesExist = userDatabase.find((el) => el.email == email);
 
   const existEmail = await sql`SELECT * FROM users WHERE email = ${email}`;
 
