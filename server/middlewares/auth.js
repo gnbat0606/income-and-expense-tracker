@@ -13,7 +13,7 @@ export const authMiddleware = async (req, res, next) => {
       res.status(401).send(err);
       return;
     } else {
-      res.locals.email = suc.email;
+      res.locals.userId = suc.userId;
       next();
       return;
     }

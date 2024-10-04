@@ -10,6 +10,7 @@ export const loginController = async (req, res) => {
   // const doesExist = database.users.find((el) => el.email == email);
 
   const existEmail = await sql`SELECT * FROM users WHERE email = ${email}`;
+  console.log(existEmail);
   const userId = existEmail[0].userid;
   const hashedPassword = existEmail[0].password;
 
@@ -26,7 +27,7 @@ export const loginController = async (req, res) => {
   }
 
   const token = jwt.sign({ userId: userId }, process.env.SECRET, {
-    expiresIn: "1h",
+    expiresIn: "1d",
   });
 
   res.status(200).send({ message: "succesfully logged in", token });

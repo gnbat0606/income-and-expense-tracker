@@ -6,7 +6,7 @@ export const signUpController = async (req, res) => {
   const { username, email, password, rePassword } = req.body;
 
   const existEmail = await sql`SELECT * FROM users WHERE email = ${email}`;
-
+  console.log(existEmail);
   if (existEmail.length > 0) {
     res.status(400).send("email burttgeltei baina");
     return;
@@ -24,6 +24,6 @@ export const signUpController = async (req, res) => {
     await sql`INSERT INTO users(userId, username, email, password, createdAt)
   VALUES(${userId}, ${username}, ${email}, ${hashedPassword}, ${createdAt})`;
 
-  // res.send(database);
+  res.send(database);
   res.status(200).send("sign-up success");
 };

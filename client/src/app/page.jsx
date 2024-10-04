@@ -18,7 +18,7 @@ export default function Home() {
   const continueHandler = () => {
     if (step === 2) {
       //apicall
-      router.push("/user");
+      router.push("/user/dashboard");
       return;
     }
     setStep((prev) => prev + 1);

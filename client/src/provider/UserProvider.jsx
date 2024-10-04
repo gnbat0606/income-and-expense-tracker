@@ -2,19 +2,17 @@
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext } from "react";
-import { useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-export const UserContext = createContext(null);
+const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-
-  const [token, setToken] = useState("true");
+  const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  const longinHandler = async (email, password) => {
+  const loginHandler = async (email, password) => {
     try {
       const result = await axios.post("http://localhost:8000/api/user/login", {
         email: email,
@@ -50,7 +48,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ longinHandler, isLoggedIn, loading, token }}>
+    <UserContext.Provider value={{ loginHandler, isLoggedIn, loading, token }}>
       {children}
     </UserContext.Provider>
   );

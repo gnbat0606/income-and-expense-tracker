@@ -59,9 +59,10 @@ export const Signup = () => {
           rePassword,
         }
       );
+
       router.push("/login");
     } catch (error) {
-      setError(error.response.data);
+      setError(error.response.message);
     }
   };
 

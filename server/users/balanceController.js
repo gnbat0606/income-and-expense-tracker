@@ -1,26 +1,24 @@
-import dotenv from "dotenv";
-import { getDatabase } from "../utils/helper.js";
-import { dbPath } from "../utils/constants.js";
-import fs from "fs";
-dotenv.config();
+import { sql } from "../database/index.js";
 
 export const balanceController = async (req, res) => {
-  const email = res.locals.email;
+  const { userId } = res.locals;
   const { balance } = req.body;
 
-  const database = await getDatabase();
+  await sql`UPDATE users SET balance = ${balance} WHERE userid = ${userId}`;
 
-  const updatedUsers = database.users.map((el) => {
-    if (el.email === email) {
-      return { ...el, balance: el.balance };
-    } else {
-      return { ...el };
-    }
-  });
+  // const database = await getDatabase();
 
-  database.users = updatedUsers;
+  // const updatedUsers = database.users.map((el) => {
+  //   if (el.email === email) {
+  //     return { ...el, balance: el.balance };
+  //   } else {
+  //     return { ...el };
+  //   }
+  // });
 
-  await fs.writeFileSync(dbPath, JSON.stringify(database));
+  // database.users = updatedUsers;
+
+  // await fs.writeFileSync(dbPath, JSON.stringify(database));
 
   res.status(200).send({ message: "Succesfully Updated" });
 };

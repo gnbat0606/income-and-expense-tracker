@@ -1,12 +1,13 @@
 "use client";
 
 import { Button } from "./Button";
-
-import { Progress } from "./Progress";
 import { useState } from "react";
 import axios from "axios";
+import { useUser } from "../provider/UserProvider";
 
 export const Confirm2 = ({ continueHandler }) => {
+  const { token } = useUser();
+
   const [balance, setBalance] = useState();
 
   const handleSelect = (e) => {
@@ -14,18 +15,18 @@ export const Confirm2 = ({ continueHandler }) => {
   };
 
   const handler = async () => {
-    const token = localStorage.getItem("token");
-    const res = axios.post(
-      "http://localhost:8000/api/user/balance",
-      { balance },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    console.log(res);
-
-    console.log(balance);
-
-    continueHandler();
+    try {
+      await axios.post(
+        "http://localhost:8000/api/user/balance",
+        { balance },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      continueHandler();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <div className="flex flex-col items-center w-[384px]">
       <div className="flex flex-col items-center gap-8">

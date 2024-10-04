@@ -7,12 +7,12 @@ import { AuthFooter } from "./AuthFooter";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/provider/userProvider";
+import { useUser } from "../provider/UserProvider";
 
 export const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
-  const { longinHandler, isLoggedIn, loading, token } = useUser();
+  const { loginHandler, isLoggedIn, loading, token } = useUser();
 
   const [loginInput, setLoginInput] = useState({
     email: "",
@@ -46,10 +46,10 @@ export const Login = () => {
       );
 
       localStorage.setItem("token", response.data.token);
-      longinHandler(email, password);
+      loginHandler(email, password);
       router.push("/");
     } catch (error) {
-      setError(error.response.data);
+      setError(error.message);
     }
   };
 

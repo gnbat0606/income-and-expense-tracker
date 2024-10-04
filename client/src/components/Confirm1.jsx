@@ -13,13 +13,17 @@ export const Confirm1 = ({ continueHandler }) => {
   const handleSelect = (e) => {
     setCurrency(e.target.value);
   };
+
   const handler = async () => {
     const token = localStorage.getItem("token");
-    const res = axios.post(
+    console.log("as");
+
+    await axios.post(
       "http://localhost:8000/api/user/currency",
       { currency },
       { headers: { Authorization: `Bearer ${token}` } }
     );
+
     continueHandler();
   };
   return (
@@ -34,12 +38,13 @@ export const Confirm1 = ({ continueHandler }) => {
             <select
               onChange={handleSelect}
               id="countries"
-              className=" h-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              className=" h-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
               <option value="MNT">MNT - Mongolian Tugrik</option>
               <option value="USD">USD - United States</option>
-              <option value="USD">Dollar - Asutralian</option>
-              <option value="Franc">Franc - French </option>
-              <option value="Euro">Euro - Germany</option>
+              <option value="AUD">Dollar - Asutralian</option>
+              <option value="FRA">Franc - French </option>
+              <option value="EUR">Euro - Germany</option>
             </select>
             <p className="text-xs text-gray-400">
               Your base currency should be the one you use most often. All
