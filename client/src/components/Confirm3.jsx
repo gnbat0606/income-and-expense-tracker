@@ -20,7 +20,11 @@ export const Confirm3 = ({ continueHandler }) => {
             and start tracking
           </div>
         </div>
-        <Button clickHandler={handler} text={"Go to Dashboard"} />
+        <Button
+          className={"bg-back text-white rounded-full py-2 w-full"}
+          clickHandler={handler}
+          text={"Go to Dashboard"}
+        />
       </div>
     </div>
   );

@@ -73,7 +73,11 @@ export const Login = () => {
           placeholder={"Password"}
         />
         {error && <div className="text-red-600">{error}</div>}
-        <Button clickHandler={login} text={"Log in"} />
+        <Button
+          className={"bg-back text-white rounded-full py-2 w-full"}
+          clickHandler={login}
+          text={"Log in"}
+        />
       </div>
       <AuthFooter
         prop={"/signup"}

@@ -16,7 +16,6 @@ export const Confirm1 = ({ continueHandler }) => {
 
   const handler = async () => {
     const token = localStorage.getItem("token");
-    console.log("as");
 
     await axios.post(
       "http://localhost:8000/api/user/currency",
@@ -38,8 +37,7 @@ export const Confirm1 = ({ continueHandler }) => {
             <select
               onChange={handleSelect}
               id="countries"
-              className=" h-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
+              className=" h-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="MNT">MNT - Mongolian Tugrik</option>
               <option value="USD">USD - United States</option>
               <option value="AUD">Dollar - Asutralian</option>
@@ -53,7 +51,11 @@ export const Confirm1 = ({ continueHandler }) => {
             </p>
           </div>
         </div>
-        <Button clickHandler={handler} text={"confirm"} />
+        <Button
+          className={"bg-back text-white rounded-full py-2 w-full"}
+          clickHandler={handler}
+          text={"confirm"}
+        />
       </div>
     </div>
   );

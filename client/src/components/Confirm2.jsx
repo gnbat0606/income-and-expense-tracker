@@ -48,7 +48,11 @@ export const Confirm2 = ({ continueHandler }) => {
           </div>
         </div>
         <div className="w-full">
-          <Button clickHandler={handler} text={"confirm"} />
+          <Button
+            className={"bg-back text-white rounded-full py-2 w-full"}
+            clickHandler={handler}
+            text={"confirm"}
+          />
         </div>
       </div>
     </div>

@@ -86,7 +86,11 @@ export const Signup = () => {
           inputHandler={rePasswordHandler}
         />
         {error && <div className="text-red-600">{error}</div>}
-        <Button text={"Sign up"} clickHandler={register} />
+        <Button
+          className={"bg-back text-white rounded-full py-2 w-full"}
+          text={"Sign up"}
+          clickHandler={register}
+        />
       </div>
       <AuthFooter
         prop={"/login"}

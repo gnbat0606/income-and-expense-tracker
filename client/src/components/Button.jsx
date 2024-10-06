@@ -1,11 +1,8 @@
 import React from "react";
 
-export const Button = ({ text, clickHandler }) => {
+export const Button = ({ text, clickHandler, className }) => {
   return (
-    <button
-      onClick={clickHandler}
-      className="bg-back text-white rounded-full py-2 w-full"
-    >
+    <button onClick={clickHandler} className={className}>
       {text}
     </button>
   );
