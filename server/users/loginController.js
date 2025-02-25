@@ -5,24 +5,23 @@ import { sql } from "../database/index.js";
 dotenv.config();
 
 export const loginController = async (req, res) => {
-  // const database = await getDatabase();
   const { email, password } = req.body;
-  // const doesExist = database.users.find((el) => el.email == email);
 
   const existEmail = await sql`SELECT * FROM users WHERE email = ${email}`;
   console.log(existEmail);
-  const userId = existEmail[0].userid;
-  const hashedPassword = existEmail[0].password;
 
-  if ((existEmail.length = 0)) {
-    res.status(400).send("email or password incorrect");
+  if (existEmail.length === 0) {
+    res.status(400).send("Email or password incorrect");
     return;
   }
 
-  const ispasswordMatch = await bcrypt.compare(password, hashedPassword);
+  const userId = existEmail[0].userid;
+  const hashedPassword = existEmail[0].password;
 
-  if (!ispasswordMatch) {
-    res.status(400).send("email or password incorrect");
+  const isPasswordMatch = await bcrypt.compare(password, hashedPassword);
+
+  if (!isPasswordMatch) {
+    res.status(400).send("Email or password incorrect");
     return;
   }
 
@@ -30,5 +29,5 @@ export const loginController = async (req, res) => {
     expiresIn: "1d",
   });
 
-  res.status(200).send({ message: "succesfully logged in", token });
+  res.status(200).send({ message: "Successfully logged in", token });
 };

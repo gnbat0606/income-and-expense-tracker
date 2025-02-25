@@ -1,8 +1,6 @@
 "use client";
 
 import { Button } from "./Button";
-import daisyui from "daisyui";
-import { Progress } from "./Progress";
 import { useState } from "react";
 import axios from "axios";
 
